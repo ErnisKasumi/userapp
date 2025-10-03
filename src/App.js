@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import axios from "axios";
+import UserList from "./components/UserList";
+import UserDetails from "./components/UserDetails";
+import AddUserForm from "./components/AddUserForm";
 
 function App() {
+  const [users, setUsers] = useState([]);
+
+  // Marrim user-at nga API vetëm një herë
+  useEffect(() => {
+    axios
+      .get("https://jsonplaceholder.typicode.com/users")
+      .then((res) => setUsers(res.data))
+      .catch((err) => console.error(err));
+  }, []);
+
+  // Funksion për të shtuar user të ri
+  const handleAddUser = (newUser) => {
+    setUsers([...users, newUser]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <nav style={{ display: "flex", gap: "1rem", marginBottom: "20px" }}>
+        <Link to="/">Home</Link>
+        <Link to="/add">Add User</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<UserList users={users} />} />
+        <Route path="/users/:id" element={<UserDetails />} />
+        <Route
+          path="/add"
+          element={<AddUserForm onAddUser={handleAddUser} />}
+        />
+      </Routes>
+    </Router>
   );
 }
 
