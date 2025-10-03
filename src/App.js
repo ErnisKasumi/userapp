@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import axios from "axios";
@@ -9,7 +8,6 @@ import AddUserForm from "./components/AddUserForm";
 function App() {
   const [users, setUsers] = useState([]);
 
-  // Marrim user-at nga API vetëm një herë
   useEffect(() => {
     axios
       .get("https://jsonplaceholder.typicode.com/users")
@@ -17,7 +15,6 @@ function App() {
       .catch((err) => console.error(err));
   }, []);
 
-  // Funksion për të shtuar user të ri
   const handleAddUser = (newUser) => {
     setUsers([...users, newUser]);
   };

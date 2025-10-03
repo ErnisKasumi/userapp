@@ -1,4 +1,3 @@
-// src/components/AddUserForm.js
 import React, { useState } from "react";
 
 export default function AddUserForm({ onAddUser }) {
@@ -17,7 +16,7 @@ export default function AddUserForm({ onAddUser }) {
       email,
       company: { name: "Local User" },
     };
-    onAddUser(newUser); // thërrasim funksionin nga App
+    onAddUser(newUser);
     setName("");
     setEmail("");
   };

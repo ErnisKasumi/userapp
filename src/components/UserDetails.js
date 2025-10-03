@@ -1,10 +1,9 @@
-// src/components/UserDetails.js
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 
 export default function UserDetails() {
-  const { id } = useParams(); // marrim id nga URL
+  const { id } = useParams();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
